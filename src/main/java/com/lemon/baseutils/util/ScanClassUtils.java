@@ -1,5 +1,6 @@
 package com.lemon.baseutils.util;
 
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -45,7 +46,7 @@ public class ScanClassUtils {
                         Class<?> clazz = Class.forName(className);
 
                         annotationList.stream().forEach(a -> {
-                            Object annotation = clazz.getAnnotation((Class)a);
+                            Object annotation = AnnotationUtils.findAnnotation(clazz, (Class)a);
                             if(null != annotation){
                                 result.add(clazz);
                             }
