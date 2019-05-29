@@ -26,8 +26,9 @@ public class MyPropertySourceFactory extends DefaultPropertySourceFactory {
         if (resource == null){
             return super.createPropertySource(name, resource);
         }
-        if (name != null && (name.endsWith(YML) || name.endsWith(YAML))) {
-            List<PropertySource<?>> sources = new YamlPropertySourceLoader().load(resource.getResource().getFilename(), resource.getResource());
+        String fileName = resource.getResource().getFilename();
+        if (fileName.endsWith(YML) || fileName.endsWith(YAML)) {
+            List<PropertySource<?>> sources = new YamlPropertySourceLoader().load(fileName, resource.getResource());
             return sources.get(0);
         } else {
             return super.createPropertySource(name, resource);
