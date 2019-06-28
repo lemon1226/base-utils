@@ -163,7 +163,7 @@ public class PrecisionUtils {
      * @param v2 减数
      * @return 两个参数的差(String)
      */
-    public static String subtract(Double v1, Double v2) {
+    public static Double subtract(Double v1, Double v2) {
         if (null== v1) {
             v1 = 0D;
         }
@@ -172,7 +172,7 @@ public class PrecisionUtils {
         }
         BigDecimal b1 = new BigDecimal(v1);
         BigDecimal b2 = new BigDecimal(v2);
-        return String.valueOf(subtract(b1, b2));
+        return subtract(b1, b2).doubleValue();
     }
 
     /**
