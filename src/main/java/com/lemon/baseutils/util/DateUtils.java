@@ -246,4 +246,20 @@ public class DateUtils {
 
         return format(localDateTime2Date(localDateTime), pattern);
     }
+
+    /**
+     * 查询当前月第一天
+     *
+     * @param pattern 格式，默认格式yyyyMMdd
+     * @return 20190101
+     */
+    public static String getFirstDayOfCurMonth(String pattern) {
+        LocalDateTime localDateTime = LocalDateTime.now().with(TemporalAdjusters.firstDayOfMonth());
+
+        if (StringUtils.isEmpty(pattern)) {
+            pattern = "yyyyMMdd";
+        }
+
+        return format(localDateTime2Date(localDateTime), pattern);
+    }
 }
