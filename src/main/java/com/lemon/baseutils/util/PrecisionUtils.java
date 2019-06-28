@@ -157,6 +157,25 @@ public class PrecisionUtils {
     }
 
     /**
+     * 精确减法运算
+     *
+     * @param v1 被减数
+     * @param v2 减数
+     * @return 两个参数的差(String)
+     */
+    public static String subtract(Double v1, Double v2) {
+        if (null== v1) {
+            v1 = 0D;
+        }
+        if (null == v2) {
+            v2 = 0D;
+        }
+        BigDecimal b1 = new BigDecimal(v1);
+        BigDecimal b2 = new BigDecimal(v2);
+        return String.valueOf(subtract(b1, b2));
+    }
+
+    /**
      * 精确乘法运算
      *
      * @param v1 被乘数
