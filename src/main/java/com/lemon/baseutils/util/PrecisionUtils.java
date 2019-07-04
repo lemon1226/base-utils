@@ -226,6 +226,26 @@ public class PrecisionUtils {
     }
 
     /**
+     * ( 相对 )精确除法运算 . 当发生除不尽情况时 , 由scale参数指 定精度 , 以后数字四舍五入
+     *
+     * @param v1    被除数
+     * @param v2    除数
+     * @param scale 表示表示需要精确到小数点以后几位
+     * @return 两个参数的商(String)
+     */
+    public static Double divide(Double v1, Double v2, Integer scale) {
+        if (null == v1) {
+            return 0D;
+        }
+        if (null == v2) {
+            v2 = 1D;
+        }
+        BigDecimal b1 = new BigDecimal(v1);
+        BigDecimal b2 = new BigDecimal(v2);
+        return divide(b1, b2, scale).doubleValue();
+    }
+
+    /**
      * 精确加法运算 , 计算多个数值总和 , 若其中有null值则忽略
      *
      * @param valList 被加数集合
