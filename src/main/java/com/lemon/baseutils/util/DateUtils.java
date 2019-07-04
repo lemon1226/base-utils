@@ -50,8 +50,8 @@ public class DateUtils {
      * @return 年
      */
     public static int getYear() {
-        LocalTime localTime = LocalTime.now();
-        return localTime.get(ChronoField.YEAR);
+        LocalDate localDate = LocalDate.now();
+        return localDate.get(ChronoField.YEAR);
     }
 
     /**
@@ -60,8 +60,8 @@ public class DateUtils {
      * @return 月份
      */
     public static int getMonth() {
-        LocalTime localTime = LocalTime.now();
-        return localTime.get(ChronoField.MONTH_OF_YEAR);
+        LocalDate localDate = LocalDate.now();
+        return localDate.get(ChronoField.MONTH_OF_YEAR);
     }
 
     /**
@@ -70,8 +70,8 @@ public class DateUtils {
      * @return 几号
      */
     public static int getMonthOfDay() {
-        LocalTime localTime = LocalTime.now();
-        return localTime.get(ChronoField.DAY_OF_MONTH);
+        LocalDate localDate = LocalDate.now();
+        return localDate.get(ChronoField.DAY_OF_MONTH);
     }
 
     /**
