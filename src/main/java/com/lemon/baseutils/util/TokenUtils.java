@@ -78,16 +78,6 @@ public class TokenUtils {
     }
 
     /**
-     * 重置token过期时间
-     * @param token
-     * @return
-     */
-    public static void resetExpirationDate(String token, String secret, long expiration) {
-        Claims claims = getClaimsFromToken(token, secret);
-        claims.setExpiration(generateExpirationDate(expiration));
-    }
-
-    /**
      * 根据 claims 生成 Token
      *
      * @param claims
