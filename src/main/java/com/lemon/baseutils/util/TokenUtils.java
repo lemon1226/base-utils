@@ -22,9 +22,10 @@ public class TokenUtils {
      * @param username
      * @return
      */
-    public static String generateToken(String username, long expiration, String secret) {
+    public static String generateToken(String username, String password, long expiration, String secret) {
         Map<String, Object> claims = new HashMap<String, Object>();
-        claims.put("sub", username);
+        claims.put("username", username);
+        claims.put("password", password);
         claims.put("created", generateCurrentDate());
         return generateToken(claims, expiration, secret);
     }
@@ -109,11 +110,28 @@ public class TokenUtils {
         String username;
         try {
             final Claims claims = getClaimsFromToken(token, secret);
-            username = claims.getSubject();
+            username = (String) claims.get("username");
         } catch (Exception e) {
             username = null;
         }
         return username;
+    }
+
+    /**
+     * 从 token 中拿到 password
+     *
+     * @param token
+     * @return
+     */
+    public static String getPasswordFromToken(String token, String secret) {
+        String password;
+        try {
+            final Claims claims = getClaimsFromToken(token, secret);
+            password = (String) claims.get("password");
+        } catch (Exception e) {
+            password = null;
+        }
+        return password;
     }
 
     /**
