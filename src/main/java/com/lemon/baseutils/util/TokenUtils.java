@@ -39,7 +39,7 @@ public class TokenUtils {
      */
     public static Boolean validateToken(String token, String usernameFlag, String passwordFlag, String secret, Date lastPasswordReset) {
         final String username = getUsernameFromToken(token, secret);
-        final String password = getUsernameFromToken(token, secret);
+        final String password = getPasswordFromToken(token, secret);
         final Date created = getCreatedDateFromToken(token, secret);
 
         return (username.equals(usernameFlag) &&
