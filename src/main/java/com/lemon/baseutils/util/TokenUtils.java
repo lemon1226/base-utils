@@ -102,6 +102,23 @@ public class TokenUtils {
     }
 
     /**
+     * 从 token 中拿到 权限信息
+     *
+     * @param token
+     * @return
+     */
+    public static List<String> getAuthoritiesFromToken(String token, String secret) {
+        List<String> authorities;
+        try {
+            final Claims claims = getClaimsFromToken(token, secret);
+            authorities = (List<String>) claims.get("authorities");
+        } catch (Exception e) {
+            authorities = null;
+        }
+        return authorities;
+    }
+
+    /**
      * 从 token 中拿到 username
      *
      * @param token
