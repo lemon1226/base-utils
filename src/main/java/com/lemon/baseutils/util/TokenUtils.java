@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,10 +23,10 @@ public class TokenUtils {
      * @param username
      * @return
      */
-    public static String generateToken(String username, String password, long expiration, String secret) {
+    public static String generateToken(String username, List<String> authorities, long expiration, String secret) {
         Map<String, Object> claims = new HashMap<String, Object>();
         claims.put("username", username);
-        claims.put("password", password);
+        claims.put("authorities", authorities);
         claims.put("created", generateCurrentDate());
         return generateToken(claims, expiration, secret);
     }
@@ -37,13 +38,11 @@ public class TokenUtils {
      * @param lastPasswordReset
      * @return
      */
-    public static Boolean validateToken(String token, String usernameFlag, String passwordFlag, String secret, Date lastPasswordReset) {
+    public static Boolean validateToken(String token, String usernameFlag, String secret, Date lastPasswordReset) {
         final String username = getUsernameFromToken(token, secret);
-        final String password = getPasswordFromToken(token, secret);
         final Date created = getCreatedDateFromToken(token, secret);
 
         return (username.equals(usernameFlag) &&
-                password.equals(passwordFlag) &&
                 !(isTokenExpired(token, secret)) &&
                 !(isCreatedBeforeLastPasswordReset(created, lastPasswordReset)));
     }
@@ -117,23 +116,6 @@ public class TokenUtils {
             username = null;
         }
         return username;
-    }
-
-    /**
-     * 从 token 中拿到 password
-     *
-     * @param token
-     * @return
-     */
-    public static String getPasswordFromToken(String token, String secret) {
-        String password;
-        try {
-            final Claims claims = getClaimsFromToken(token, secret);
-            password = (String) claims.get("password");
-        } catch (Exception e) {
-            password = null;
-        }
-        return password;
     }
 
     /**
